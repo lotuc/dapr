@@ -63,6 +63,7 @@ import (
 	"github.com/dapr/components-contrib/state/postgresql"
 	state_redis "github.com/dapr/components-contrib/state/redis"
 	"github.com/dapr/components-contrib/state/rethinkdb"
+	state_sqlite "github.com/dapr/components-contrib/state/sqlite"
 	"github.com/dapr/components-contrib/state/sqlserver"
 	"github.com/dapr/components-contrib/state/zookeeper"
 
@@ -252,6 +253,9 @@ func main() {
 			state_loader.New("aws.dynamodb", state_dynamodb.NewDynamoDBStateStore),
 			state_loader.New("mysql", func() state.Store {
 				return state_mysql.NewMySQLStateStore(logContrib)
+			}),
+			state_loader.New("sqlite", func() state.Store {
+				return state_sqlite.NewSqliteStateStore(logContrib)
 			}),
 			state_loader.New("oci.objectstorage", func() state.Store {
 				return state_oci_objectstorage.NewOCIObjectStorageStore(logContrib)
